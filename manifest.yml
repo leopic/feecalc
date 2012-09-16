@@ -1,0 +1,14 @@
+--- 
+applications: 
+  .: 
+    name: feecalc
+    mem: 64M
+    framework: 
+      info: 
+        exec: 
+        mem: 64M
+        description: Node.js Application
+      name: node
+    instances: 1
+    url: ${name}.${target-base}
+    infra: aws

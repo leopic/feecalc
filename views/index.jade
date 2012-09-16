@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  form.calc-form
+    label Monto a recibir: $
+    input(type='text', value='', placeholder='amount in US dollars').total-input#total-amount
+
+  div#result
+    h2 te recomendamos usar
+    p#method

@@ -2,12 +2,20 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Welcome to the #{title} 
 
   form.calc-form
     label Monto a recibir: $
     input(type='text', value='', placeholder='amount in US dollars').total-input#total-amount
 
-  div#result
-    h2 te recomendamos usar
-    p#method
+  div.payment-methods
+    div.pay-option-one
+      h2 Paypal > Bank of America > Local withdrawals
+      ul.pay-breakdown
+        li#one-initial-amount initial amount: $
+        li#one-new-amount after Paypal fees: $ 
+        li#one-total-fees total fees: $
+        li#one-final-amount Final Amount, brokedown in <span id="one-total-withdrawals">SOME</span> withdrawals
+    div.pay-option-two
+      h2 Bank to Bank transfer
+  

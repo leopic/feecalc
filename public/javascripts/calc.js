@@ -1,13 +1,19 @@
 function init() {
   window.onkeyup = feeCalc;
+
+  var oneInitialAmountEl = document.getElementById("one-initial-amount"),
+      oneNewAmountEl = document.getElementById("one-new-amount"),
+      oneFinalAmountEl = document.getElementById("one-final-amount"),
+      oneTotalFeesEl = document.getElementById("one-total-fees"),
+      oneTotalWithdrawal = document.getElementById("one-total-withdrawals");
+
 }
 init();
 
 function feeCalc() {
   var el = document.getElementById('total-amount');
   
-  if(el.value > 0) { // don't spend cycles on less than $7 
-
+  if(el.value > 0) { 
     var amount = el.value,
         finalAmount = 0,
         totalWithdrawals = 0;
@@ -25,10 +31,9 @@ function feeCalc() {
         bacFee = 15;
 
     var paypalTakes = (paypalFee * amount)/100,
-        newAmount = amount - paypalTakes;
+        newAmount = (amount - paypalTakes).toFixed(2);
 
     console.log("---");
-    console.log("What you startup with: $" + amount);
 
     // if the entire thing can be taken out in a single withdrawal
     if(newAmount < maximumPerWidthdraw) { // under $400: use paypal + boa
@@ -37,11 +42,11 @@ function feeCalc() {
     } else {
       // if it can't be taken out a single withdrawal, calculate total withdrawals and fees
       totalWithdrawals = Math.ceil(newAmount / maximumPerWidthdraw);
-      finalAmount = newAmount - ((boaPerTransFee + localBankFee) * totalWithdrawals);
+      finalAmount = (newAmount - ((boaPerTransFee + localBankFee) * totalWithdrawals)).toFixed(2);
       document.getElementById("one-initial-amount").innerText = amount;
-      document.getElementById("one-final-amount").innerText = finalAmount;
       document.getElementById("one-new-amount").innerText = newAmount;
-      document.getElementById("one-total-fees").innerText = amount - finalAmount;
+      document.getElementById("one-final-amount").innerText = finalAmount;
+      document.getElementById("one-total-fees").innerText = (amount - finalAmount).toFixed(2);
       document.getElementById("one-total-withdrawals").innerText = totalWithdrawals;
     }
 

@@ -5,3 +5,12 @@ body {
 a {
   color: #00b7ff;
 }
+.total-input {
+  border: none;
+  border-bottom: 2px dashed #aaa;
+  font-size: 24px;
+  font-family: Georgia, Times New Roman, serif;
+  height: 40px;
+  padding: 0 10px;
+  width: 60px;
+}

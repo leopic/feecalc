@@ -36,13 +36,13 @@ function feeCalc() {
       console.log("What you end up using Paypal, single withdraw: $" + finalAmount);
     } else {
       // if it can't be taken out a single withdrawal, calculate total withdrawals and fees
-      //document.getElementById("one-initial-amount");
-      //console.log("After Paypal: $" + newAmount);
-      console.info("Paypal took: $" + (amount - newAmount));
       totalWithdrawals = Math.ceil(newAmount / maximumPerWidthdraw);
       finalAmount = newAmount - ((boaPerTransFee + localBankFee) * totalWithdrawals);
-      console.log("Total in fees: $" + (amount - finalAmount) + ", after " + totalWithdrawals + " withdrawals.");
-      console.log("What you end up using Paypal: $" + finalAmount);
+      document.getElementById("one-initial-amount").innerText = amount;
+      document.getElementById("one-final-amount").innerText = finalAmount;
+      document.getElementById("one-new-amount").innerText = newAmount;
+      document.getElementById("one-total-fees").innerText = amount - finalAmount;
+      document.getElementById("one-total-withdrawals").innerText = totalWithdrawals;
     }
 
     // checking if option one is too expensive

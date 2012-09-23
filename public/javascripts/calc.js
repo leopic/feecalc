@@ -53,20 +53,20 @@ function feeCalc() {
 function displayContent(amount, newAmount, finalAmount, totalWithdrawals, preferredMethod){
    // print and such 
     document.getElementById("preferred-method").innerText = preferredMethod;
-    document.getElementById("one-initial-amount").innerText = amount;
-    document.getElementById("one-final-amount").innerText = finalAmount;
-    document.getElementById("one-total-fees").innerText = (amount - finalAmount).toFixed(2);
+    document.getElementById("initial-amount").innerText = amount;
+    document.getElementById("total-fees").innerText = (amount - finalAmount).toFixed(2);
+    document.getElementById("final-amount").innerText = finalAmount;
     if(newAmount){
-      document.getElementById("one-new-amount").parentElement.style.display = 'list-item';
-      document.getElementById("one-new-amount").innerText = newAmount;
+      document.getElementById("new-amount").parentElement.style.display = 'list-item';
+      document.getElementById("new-amount").innerText = newAmount;
     } else {
-      document.getElementById("one-new-amount").parentElement.style.display = 'none';
+      document.getElementById("new-amount").parentElement.style.display = 'none';
     }
     if(totalWithdrawals){
-      document.getElementById("one-total-withdrawals").parentElement.style.display = 'inline';
-      document.getElementById("one-total-withdrawals").innerText = totalWithdrawals;
+      document.getElementById("total-withdrawals").parentElement.style.display = 'inline';
+      document.getElementById("total-withdrawals").innerText = totalWithdrawals;
     } else {
-      document.getElementById("one-total-withdrawals").parentElement.style.display = 'none';
+      document.getElementById("total-withdrawals").parentElement.style.display = 'none';
     }
   }
 }

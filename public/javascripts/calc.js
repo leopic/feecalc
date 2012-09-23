@@ -10,7 +10,8 @@ function feeCalc() {
     var amount = el.value,
         finalAmount = 0,
         totalWithdrawals = 0,
-        preferredMethod;
+        preferredMethod,
+        className = "paypal";
 
     // option a
     // paypal > boa > local, chunks of $400
@@ -45,28 +46,35 @@ function feeCalc() {
       totalWithdrawals = false;
       newAmount = false;
       preferredMethod = "Bank to bank transfer";
+      className = "bank-transfer";      
     } 
 
-   displayContent(amount, newAmount, finalAmount, totalWithdrawals, preferredMethod);
+   displayContent(amount, newAmount, finalAmount, totalWithdrawals, preferredMethod, className);
 }
 
+// print and such 
 function displayContent(amount, newAmount, finalAmount, totalWithdrawals, preferredMethod){
-   // print and such 
+    var newAmountEl = document.getElementById("new-amount"),
+        totalWithdrawalsEl = document.getElementById("total-withdrawals");
+
     document.getElementById("preferred-method").innerText = preferredMethod;
+    document.getElementById("preferred-method"). = preferredMethod;
     document.getElementById("initial-amount").innerText = amount;
     document.getElementById("total-fees").innerText = (amount - finalAmount).toFixed(2);
-    document.getElementById("final-amount").innerText = finalAmount;
-    if(newAmount){
-      document.getElementById("new-amount").parentElement.style.display = 'list-item';
-      document.getElementById("new-amount").innerText = newAmount;
+    document.getElementById("final-amount").innerText = parseInt(finalAmount,10).toFixed(2);
+
+    if(newAmount) {
+      newAmountEl.parentElement.style.display = 'list-item';
+      newAmountEl.innerText = newAmount;
     } else {
-      document.getElementById("new-amount").parentElement.style.display = 'none';
+      newAmountEl.parentElement.style.display = 'none';
     }
-    if(totalWithdrawals){
-      document.getElementById("total-withdrawals").parentElement.style.display = 'inline';
-      document.getElementById("total-withdrawals").innerText = totalWithdrawals;
+
+    if(totalWithdrawals) {
+      totalWithdrawalsEl.parentElement.style.display = 'inline';
+      totalWithdrawalsEl.innerText = totalWithdrawals;
     } else {
-      document.getElementById("total-withdrawals").parentElement.style.display = 'none';
+      totalWithdrawalsEl.parentElement.style.display = 'none';
     }
   }
 }

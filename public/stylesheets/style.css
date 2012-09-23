@@ -47,3 +47,9 @@ a {
   background: transparent;
   margin-left: 10px;
 }
+.paypal {
+  background: url("/images/paypal.png") top left no-repeat;
+}
+.bank-transfer {
+  background: url("/images/bncr.gif") left 48px no-repeat;
+}

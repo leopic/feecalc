@@ -56,9 +56,10 @@ function feeCalc() {
 function displayContent(amount, newAmount, finalAmount, totalWithdrawals, preferredMethod){
     var newAmountEl = document.getElementById("new-amount"),
         totalWithdrawalsEl = document.getElementById("total-withdrawals");
+        prefferdMethodEl = document.getElementById("preferred-method");
 
-    document.getElementById("preferred-method").innerText = preferredMethod;
-    document.getElementById("preferred-method"). = preferredMethod;
+    prefferdMethodEl.innerText = preferredMethod;
+    prefferdMethodEl.parentElement.className = 'payment-method ' + className;
     document.getElementById("initial-amount").innerText = amount;
     document.getElementById("total-fees").innerText = (amount - finalAmount).toFixed(2);
     document.getElementById("final-amount").innerText = parseInt(finalAmount,10).toFixed(2);

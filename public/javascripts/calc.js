@@ -1,11 +1,5 @@
 function init() {
   window.onkeyup = feeCalc;
-
-  var initialAmElem = document.getElementById("one-initial-amount"),
-      newAmElem = document.getElementById("one-new-amount"),
-      oneFinalElem = document.getElementById("one-final-amount"),
-      oneTotalFeesElem = document.getElementById("one-total-fees");
-      oneTotalWithdrawalsElem = document.getElementById("one-total-withdrawals");
 }
 init();
 
@@ -52,18 +46,25 @@ function feeCalc() {
       newAmount = false;
       preferredMethod = "Bank to bank transfer";
     } 
-    
-      document.getElementById("one-initial-amount").innerText = amount;
-      if(newAmount){
-        document.getElementById("one-new-amount").style.display = 'inline';
-        document.getElementById("one-new-amount").innerText = newAmount;
-      } else {
-        document.getElementById("one-new-amount").style.display = 'none';
-      }
+   
+   // print and such 
+    document.getElementById("one-initial-amount").innerText = amount;
+    if(newAmount){
+      document.getElementById("one-new-amount").parentElement.style.display = 'list-item';
       document.getElementById("one-new-amount").innerText = newAmount;
-      document.getElementById("one-final-amount").innerText = finalAmount;
-      document.getElementById("one-total-fees").innerText = (amount - finalAmount).toFixed(2);
+    } else {
+      document.getElementById("one-new-amount").parentElement.style.display = 'none';
+    }
+    document.getElementById("one-new-amount").innerText = newAmount;
+    document.getElementById("one-final-amount").innerText = finalAmount;
+    document.getElementById("one-total-fees").innerText = (amount - finalAmount).toFixed(2);
+    if(totalWithdrawals){
+      document.getElementById("one-total-withdrawals").parentElement.style.display = 'inline';
       document.getElementById("one-total-withdrawals").innerText = totalWithdrawals;
-      document.getElementById("preferred-method").innerText = preferredMethod;
+    } else {
+      document.getElementById("one-total-withdrawals").parentElement.style.display = 'none';
+    }
+    document.getElementById("one-total-withdrawals").innerText = totalWithdrawals;
+    document.getElementById("preferred-method").innerText = preferredMethod;
   }
 }

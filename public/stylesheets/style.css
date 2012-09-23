@@ -1,16 +1,49 @@
 body {
-  padding: 50px;
+  padding: 2%;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 a {
   color: #00b7ff;
 }
+.container {
+  width: 400px;
+  margin: 0 auto;
+}
 .total-input {
   border: none;
-  border-bottom: 2px dashed #aaa;
+  border-bottom: 1px solid #aaa;
   font-size: 24px;
   font-family: Georgia, Times New Roman, serif;
   height: 40px;
   padding: 0 10px;
-  width: 60px;
+  text-align: center;
+  width: 80px;
+}
+.amt {
+  color: #333;
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 28px;
+}
+.receiving-amt {
+  display: inline-block;
+  vertical-align: top;
+}
+.calc-form {
+  background: rgba(0,0,0,0.01);
+  padding: 0 0 0 10px;
+}
+.pay-breakdown {
+  padding: 0;
+  margin: 0;
+}
+.pay-breakdown li {
+  list-style-type: none;
+  margin-right: 70px;
+  text-align: right;
+  color: #666;
+}
+.total-input {
+  background: transparent;
+  margin-left: 10px;
 }

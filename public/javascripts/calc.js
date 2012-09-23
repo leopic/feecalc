@@ -1,12 +1,11 @@
 function init() {
   window.onkeyup = feeCalc;
 
-  var oneInitialAmountEl = document.getElementById("one-initial-amount"),
-      oneNewAmountEl = document.getElementById("one-new-amount"),
-      oneFinalAmountEl = document.getElementById("one-final-amount"),
-      oneTotalFeesEl = document.getElementById("one-total-fees"),
-      oneTotalWithdrawal = document.getElementById("one-total-withdrawals");
-
+  var initialAmElem = document.getElementById("one-initial-amount"),
+      newAmElem = document.getElementById("one-new-amount"),
+      oneFinalElem = document.getElementById("one-final-amount"),
+      oneTotalFeesElem = document.getElementById("one-total-fees");
+      oneTotalWithdrawalsElem = document.getElementById("one-total-withdrawals");
 }
 init();
 
@@ -16,7 +15,8 @@ function feeCalc() {
   if(el.value > 0) { 
     var amount = el.value,
         finalAmount = 0,
-        totalWithdrawals = 0;
+        totalWithdrawals = 0,
+        preferredMethod;
 
     // option a
     // paypal > boa > local, chunks of $400
@@ -33,27 +33,37 @@ function feeCalc() {
     var paypalTakes = (paypalFee * amount)/100,
         newAmount = (amount - paypalTakes).toFixed(2);
 
-    console.log("---");
-
     // if the entire thing can be taken out in a single withdrawal
     if(newAmount < maximumPerWidthdraw) { // under $400: use paypal + boa
       finalAmount = newAmount - (boaPerTransFee + localBankFee);
-      console.log("What you end up using Paypal, single withdraw: $" + finalAmount);
+      totalWithdrawals = 1;
+      preferredMethod = "Single withdrawl, use Paypal.";
     } else {
       // if it can't be taken out a single withdrawal, calculate total withdrawals and fees
       totalWithdrawals = Math.ceil(newAmount / maximumPerWidthdraw);
       finalAmount = (newAmount - ((boaPerTransFee + localBankFee) * totalWithdrawals)).toFixed(2);
+      preferredMethod = "Multiple withdrawls, use Paypal.";
+    }
+
+    // checking if option one is too expensive, then use option B
+    if((amount - finalAmount) > (intlTransFee + bncrFee)){
+      totalFees = intlTransFee + bncrFee;
+      totalWithdrawals = false;
+      newAmount = false;
+      preferredMethod = "Bank to bank transfer";
+    } 
+    
       document.getElementById("one-initial-amount").innerText = amount;
+      if(newAmount){
+        document.getElementById("one-new-amount").style.display = 'inline';
+        document.getElementById("one-new-amount").innerText = newAmount;
+      } else {
+        document.getElementById("one-new-amount").style.display = 'none';
+      }
       document.getElementById("one-new-amount").innerText = newAmount;
       document.getElementById("one-final-amount").innerText = finalAmount;
       document.getElementById("one-total-fees").innerText = (amount - finalAmount).toFixed(2);
       document.getElementById("one-total-withdrawals").innerText = totalWithdrawals;
-    }
-
-    // checking if option one is too expensive
-    if((amount - finalAmount) > (intlTransFee + bncrFee)){
-        console.log('mejor usar bncr');
-        console.log('What you end up using BNCR, bank to bank: $' + (amount - (intlTransFee + bncrFee)));
-    }
+      document.getElementById("preferred-method").innerText = preferredMethod;
   }
 }

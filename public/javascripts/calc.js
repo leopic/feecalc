@@ -22,6 +22,44 @@ function switchMethod() {
   }
 }
 
+// paypal > boa > local, chunks of $400
+function paypalCalculation(amount) {
+    //debugger;
+
+    var paypalFee = 5.5531697938,
+        boaPerTransFee = 5, // per $400
+        localBankFee = 1.50, // per $400
+        maximumPerWidthdraw = 400,
+        totalFees = 0,
+        totalPaypalfees = (paypalFee * amount)/100,
+        result = {
+          amount: amount,
+          preferredMethod: "",
+          newAmount: amount - totalPaypalfees,          
+          totalWithdrawals: 0,
+          totalFees: 0,
+          finalAmount: 0
+        }
+
+
+    // if the entire thing can be taken out in a single withdrawal
+    if(result.newAmount < maximumPerWidthdraw) { // under $400: use paypal + boa
+      result.totalWithdrawals = 1;
+      result.totalFees = (boaPerTransFee + localBankFee) + totalPaypalfees;      
+      result.finalAmount = result.amount - result.totalFees;      
+      result.preferredMethod = "Single withdrawl, use Paypal.";
+    } else {
+      // if it can not be taken out a single withdrawal, calculate total withdrawals and fees
+      result.totalWithdrawals = Math.ceil(result.newAmount / maximumPerWidthdraw);      
+      result.totalFees = totalPaypalfees + ((boaPerTransFee + localBankFee) * result.totalWithdrawals);
+      result.finalAmount = (result.amount - result.totalFees).toFixed(2);      
+      result.preferredMethod = "Multiple withdrawls, use Paypal.";
+    }
+    
+    return result;
+}
+
+// recommendation, old school
 function feeCalc() {
   var el = document.getElementById('total-amount');
   
@@ -74,7 +112,7 @@ function feeCalc() {
 // print and such 
 function displayContent(amount, newAmount, finalAmount, totalWithdrawals, preferredMethod){
     
-    console.log(window.calcMethod);
+    //console.log(window.calcMethod);
 
     var newAmountEl = document.getElementById("new-amount"),
         totalWithdrawalsEl = document.getElementById("total-withdrawals");

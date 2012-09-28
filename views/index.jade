@@ -6,12 +6,31 @@ block content
   form.calc-form
     h2.receiving-amt Amount to be received: 
     input(type='text', value='', placeholder='$0.00').total-input#total-amount
+    label.compare-label
+      input(type='checkbox')#compare-checkbox
+      span.compare-text compare?
 
-  div.payment-method
+  div.payment-method.recommendation#recommendation
       h2#preferred-method Recommended payment method
       ul.pay-breakdown
-        li Initial amount:<b class="amt"> $</b><span id="initial-amount" class="amt">0.00</span>
-        li After Paypal fees:<b class="amt">$</b><span id="new-amount" class="amt">0.00</span>
+        li Initial amount: <b class="amt">$</b><span id="initial-amount" class="amt">0.00</span>
+        li After Paypal fees: <b class="amt">$</b><span id="new-amount" class="amt">0.00</span>
         li Total fees: <b class="amt">$</b><span id="total-fees" class="amt">0.00</span>
         li Final amount<span class="container-withdrawal">, in <span id="total-withdrawals">0</span> withdrawals</span> <b class="amt">$</b><span id="final-amount" class="amt">0.00</span>
-  
+
+  div#comparison.side-comparison
+    .comparison.comparison-paypal
+      h2 Paypal
+      ul.pay-breakdown
+        li Initial amount:<b class="amt"> $</b><span id="ppl-initial-amount" class="amt">0.00</span>
+        li After Paypal fees:<b class="amt">$</b><span id="ppl-new-amount" class="amt">0.00</span>
+        li Total fees: <b class="amt">$</b><span id="ppl-total-fees" class="amt">0.00</span>
+        li Final amount<span class="container-withdrawal">, in <span id="ppl-total-withdrawals">0</span> withdrawals</span> <b class="amt">$</b><span id="ppl-final-amount" class="amt">0.00</span>
+
+    .comparison.comparison-bank-transfer.bank-transfer
+      h2 Banco Nacional
+      ul.pay-breakdown
+        li Initial amount:<b class="amt"> $</b><span id="initial-amount" class="amt">0.00</span>
+        li Total fees: <b class="amt">$</b><span id="total-fees" class="amt">0.00</span>
+        li Final amount: <b class="amt">$</b><span id="ppl-final-amount" class="amt">0.00</span>
+      

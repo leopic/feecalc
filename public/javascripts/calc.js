@@ -1,7 +1,26 @@
 function init() {
+  window.calcMethod = "recommendation";
+
+  // calculator
   window.onkeyup = feeCalc;
+
+  // layout 'manager'
+  document.getElementById('compare-checkbox').onchange = switchMethod;
 }
+
 init();
+
+function switchMethod() {
+  var compareEl = document.getElementById('compare-checkbox');
+
+  if(compareEl.checked) {
+    document.body.className = "comparison-body";
+    window.calcMethod = "comparison";
+  } else {
+    document.body.className = "recommendation-body"
+    window.calcMethod = "recommendation";
+  }
+}
 
 function feeCalc() {
   var el = document.getElementById('total-amount');
@@ -34,7 +53,7 @@ function feeCalc() {
       totalWithdrawals = 1;
       preferredMethod = "Single withdrawl, use Paypal.";
     } else {
-      // if it can't be taken out a single withdrawal, calculate total withdrawals and fees
+      // if it can not be taken out a single withdrawal, calculate total withdrawals and fees
       totalWithdrawals = Math.ceil(newAmount / maximumPerWidthdraw);
       finalAmount = (newAmount - ((boaPerTransFee + localBankFee) * totalWithdrawals)).toFixed(2);
       preferredMethod = "Multiple withdrawls, use Paypal.";
@@ -54,6 +73,9 @@ function feeCalc() {
 
 // print and such 
 function displayContent(amount, newAmount, finalAmount, totalWithdrawals, preferredMethod){
+    
+    console.log(window.calcMethod);
+
     var newAmountEl = document.getElementById("new-amount"),
         totalWithdrawalsEl = document.getElementById("total-withdrawals");
         prefferdMethodEl = document.getElementById("preferred-method");

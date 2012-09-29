@@ -13,24 +13,49 @@ block content
   div.payment-method.recommendation#recommendation
       h2#preferred-method Recommended payment method
       ul.pay-breakdown
-        li Initial amount: <b class="amt">$</b><span id="initial-amount" class="amt">0.00</span>
-        li After Paypal fees: <b class="amt">$</b><span id="new-amount" class="amt">0.00</span>
-        li Total fees: <b class="amt">$</b><span id="total-fees" class="amt">0.00</span>
-        li Final amount<span class="container-withdrawal">, in <span id="total-withdrawals">0</span> withdrawals</span> <b class="amt">$</b><span id="final-amount" class="amt">0.00</span>
+        li Initial amount:
+          b.amt $
+          span#initial-amount.amt 0.00
+        li After Paypal fees:
+          b.amt $
+          span#new-amount.amt 0.00
+        li Total fees: 
+          b.amt $
+          span#total-fees.amt 0.00
+        li Final amount
+          span.container-withdrawal , in
+            <span id="total-withdrawals">0</span> withdrawals 
+          b.amt $
+          span#final-amount.amt 0.00
 
   div#comparison.side-comparison
     .comparison.comparison-paypal
       h2 Paypal
       ul.pay-breakdown
-        li Initial amount:<b class="amt"> $</b><span id="ppl-initial-amount" class="amt">0.00</span>
-        li After Paypal fees:<b class="amt">$</b><span id="ppl-new-amount" class="amt">0.00</span>
-        li Total fees: <b class="amt">$</b><span id="ppl-total-fees" class="amt">0.00</span>
-        li Final amount, in <span id="ppl-total-withdrawals">0</span> withdrawals <b class="amt">$</b><span id="ppl-final-amount" class="amt">0.00</span>
+        li Initial amount: 
+          b.amt $
+          span#ppl-initial-amount.amt 0.00
+        li After Paypal fees: 
+          b.amt $
+          span#ppl-new-amount.amt 0.00
+        li Total fees: 
+          b.amt $
+          span#ppl-total-fees.amt 0.00
+        li Final amount, in 
+          <span id="ppl-total-withdrawals">0</span> withdrawals 
+          b.amt $
+          span#ppl-final-amount.amt 0.00
 
     .comparison.comparison-bank-transfer
       h2 Banco Nacional
       ul.pay-breakdown
-        li Initial amount:<b class="amt"> $</b><span id="b2b-initial-amount" class="amt">0.00</span>
-        li Total fees: <b class="amt">$</b><span id="b2b-total-fees" class="amt">0.00</span>
-        li Final amount: <b class="amt">$</b><span id="b2b-final-amount" class="amt">0.00</span>
+        li Initial amount: 
+          b.amt $
+          span#b2b-initial-amount.amt 0.00
+        li Total fees: 
+          b.amt $
+          span#b2b-total-fees.amt 0.00
+        li Final amount: 
+          b.amt $
+          span#b2b-final-amount.amt 0.00
       

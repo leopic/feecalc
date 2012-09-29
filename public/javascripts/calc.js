@@ -31,10 +31,10 @@ function bankToBankCalculation(amount, paypalCalc) {
         transferenceFee = 0,
         result = {
           className: "bank-transfer",
-          totalWithdrawals: false,
-          newAmount: false,
           preferredMethod: "Bank to bank transfer",
-          amount: amount
+          amount: amount,
+          totalFees: 0,
+          finalAmount: 0
         }
 
     if(bncrFee < bacFee){
@@ -43,10 +43,8 @@ function bankToBankCalculation(amount, paypalCalc) {
       transferenceFee = intlTransFee + bacFee;
     }
 
-    if(paypalCalc.totalFees > transferenceFee) {
-      result.totalFees = intlTransFee + bncrFee;
-      result.finalAmount = amount - result.totalFees;
-    }
+    result.totalFees = intlTransFee + bncrFee;
+    result.finalAmount = amount - result.totalFees;
 
     return result;
 }
@@ -69,7 +67,6 @@ function paypalCalculation(amount) {
           className: "paypal"          
         }
 
-
     // if the entire thing can be taken out in a single withdrawal
     if(result.newAmount < maximumPerWidthdraw) { // under $400: use paypal + boa
       result.totalWithdrawals = 1;
@@ -84,7 +81,6 @@ function paypalCalculation(amount) {
       result.preferredMethod = "Multiple withdrawls, use Paypal.";
     }
 
-    //debugger;    
     return result;
 }
 
@@ -117,12 +113,12 @@ function displayContent(bestCalculation) {
     prefferdMethodEl.innerText = bestCalculation.preferredMethod;
     prefferdMethodEl.parentElement.className = 'payment-method ' + bestCalculation.className;
     document.getElementById("initial-amount").innerText = bestCalculation.amount;
-    document.getElementById("total-fees").innerText = bestCalculation.totalFees;
-    document.getElementById("final-amount").innerText = bestCalculation.finalAmount;
+    document.getElementById("total-fees").innerText = parseInt(bestCalculation.totalFees, 10).toFixed(2);
+    document.getElementById("final-amount").innerText = parseInt(bestCalculation.finalAmount, 10).toFixed(2);
 
     if(bestCalculation.newAmount) {
       newAmountEl.parentElement.style.display = 'list-item';
-      newAmountEl.innerText = bestCalculation.newAmount;
+      newAmountEl.innerText = parseInt(bestCalculation.newAmount, 10).toFixed(2);
     } else {
       newAmountEl.parentElement.style.display = 'none';
     }

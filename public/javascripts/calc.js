@@ -6,6 +6,9 @@ function init() {
 
   // layout 'manager'
   document.getElementById('compare-checkbox').onchange = switchMethod;
+
+  // add initial focus to input box
+  document.getElementById('total-amount').focus();
 }
 
 init();

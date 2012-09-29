@@ -1,23 +1,5 @@
 body
-  padding: 2%
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
-
-a
-  color: #00B7FF
-
-.container
-  width: 800px
-  margin: 0 auto
-
-.total-input
-  border: none
-  border-bottom: 1px solid #aaa
-  font-size: 24px
-  font-family: Georgia, Times New Roman, serif
-  height: 40px
-  padding: 0 10px
-  text-align: center
-  width: 80px
+  font: 16px/24px "Lucida Grande", Helvetica, Arial, sans-serif
 
 .amt
   color: #333
@@ -25,57 +7,80 @@ a
   font-weight: bold
   line-height: 28px
 
-.receiving-amt
-  display: inline-block
-  vertical-align: top
-
 .calc-form
-  background: rgba(0, 0, 0, 0.02)
-  padding: 0 0 0 10px
+  background: $gray 
+
+.comparison
+  display: inline-block
+  padding: 70px 15px 15px
+  vertical-align: top
+  width: 320px
+
+  &.best
+    background-color: $gray
+
+  &.comparison-paypal
+    text-align: right
+
+  .b2b-initial-amount
+    margin-bottom: 27px
+
+.container
+  margin: 0 auto
+  width: 700px
 
 .pay-breakdown
-  padding: 0
   margin: 0
-  list-style-position: inside
+  padding: 0
+  list-style-type: none
 
 .payment-method .pay-breakdown
   margin-right: 400px
 
   li
-    list-style-type: none
-    margin-right: 70px
-    text-align: right
     color: #666
+    list-style-type: none
+    text-align: right
+
+.receiving-amt
+  display: inline-block
+  vertical-align: top
 
 .total-input
-  background: transparent
-  margin-left: 10px
+  background: #fff
+  border: 1px solid lighten(black, 75%)
+  border-radius: 3px
+  font-size: 24px
+  font-family: Georgia, Times New Roman, serif
+  height: 40px
+  margin: 10px 5px 0 10px
+  padding: 0 10px
+  text-align: center
+  width: 80px
 
-.comparison h2
-  visibility: hidden
+  &:focus
+    box-shadow: 0 0 16px lighten(black, 59%), 0 0 10px lighten(black, 79%), 0 0 4px lighten(black, 99%)
+    outline: 0
 
-.comparison.best
-  background-color: rgba(0, 0, 0, 0.02) 
-
+// background images
 .paypal,
 .comparison-paypal
-  background: url('/images/paypal.png') top left no-repeat
+  background: url('/images/paypal.png') -5px 35px no-repeat
 
 .bank-transfer,
 .comparison-bank-transfer
   background: url('/images/bncr.gif') left 48px no-repeat
 
 .comparison-paypal
-  background-position: 0 -29px
+  background-position: center 10px
 
 .comparison-bank-transfer
-  background-position: 0 4px
+  background-position: top center
 
-.comparison 
-  display: inline-block
-  width: 50%
-  vertical-align: top
+.hidden
+  display: none
 
+// toggle classes, hide stuff when needed
 .recommendation-body #comparison
   display: none
 

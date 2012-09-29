@@ -21,6 +21,8 @@ function switchMethod() {
     document.body.className = "recommendation-body"
     window.calcMethod = "recommendation";
   }
+
+  feeCalc();
 }
 
 // option b: bank to bank transfer
@@ -100,6 +102,41 @@ function feeCalc() {
       } else {
         displayRecommendation(bankToBankCalc);
       }
+    } else {
+      displayComparisons(paypalCalc, bankToBankCalc);
+    }
+}
+
+// displaying both payment methods, paypal and b2b
+function displayComparisons(paypalCalc, bankToBankCalc) {
+  var pplInitialAmtEl = document.getElementById('ppl-initial-amount'),
+      pplNewAmtEl = document.getElementById('ppl-new-amount'),
+      pplTotalFeesEl = document.getElementById('ppl-total-fees'),
+      pplTotalWithdrawalsEl = document.getElementById('ppl-total-withdrawals'),
+      pplFinalAmtEl = document.getElementById('ppl-final-amount'),
+      b2bInitialAmtEl = document.getElementById('b2b-initial-amount'),
+      b2bTotalFeesEl = document.getElementById('b2b-total-fees'),
+      b2bFinalAmtEl = document.getElementById('b2b-final-amount');
+
+    // paypal prints
+    pplInitialAmtEl.innerText = parseFloat(paypalCalc.amount).toFixed(2);
+    pplNewAmtEl.innerText = parseFloat(paypalCalc.newAmount).toFixed(2);
+    pplTotalFeesEl.innerText = parseFloat(paypalCalc.totalFees).toFixed(2); 
+    pplTotalWithdrawalsEl.innerText = paypalCalc.totalWithdrawals; 
+    pplFinalAmtEl.innerText = parseFloat(paypalCalc.finalAmount).toFixed(2); 
+
+    // bank to bank prints
+    b2bInitialAmtEl.innerText = parseFloat(bankToBankCalc.amount).toFixed(2); 
+    b2bTotalFeesEl.innerText = parseFloat(bankToBankCalc.totalFees).toFixed(2);
+    b2bFinalAmtEl.innerText = parseFloat(bankToBankCalc.finalAmount).toFixed(2);
+
+    // adding a 'best' class to the container elements
+    if(bankToBankCalc.finalAmount > paypalCalc.finalAmount) {
+      document.getElementsByClassName('comparison-paypal')[0].classList.remove('best');
+      document.getElementsByClassName('comparison-bank-transfer')[0].classList.add('best');
+    } else {
+      document.getElementsByClassName('comparison-bank-transfer')[0].classList.remove('best');
+      document.getElementsByClassName('comparison-paypal')[0].classList.add('best');
     }
 }
 

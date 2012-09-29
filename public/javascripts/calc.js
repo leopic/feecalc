@@ -77,7 +77,7 @@ function paypalCalculation(amount) {
       // if it can not be taken out a single withdrawal, calculate total withdrawals and fees
       result.totalWithdrawals = Math.ceil(result.newAmount / maximumPerWidthdraw);      
       result.totalFees = totalPaypalfees + ((boaPerTransFee + localBankFee) * result.totalWithdrawals);
-      result.finalAmount = (result.amount - result.totalFees).toFixed(2);      
+      result.finalAmount = result.amount - result.totalFees;      
       result.preferredMethod = "Multiple withdrawls, use Paypal.";
     }
 
@@ -96,36 +96,38 @@ function feeCalc() {
 
     if(window.calcMethod === "recommendation") {
       if(paypalCalc.finalAmount > bankToBankCalc.finalAmount) {
-          displayContent(paypalCalc);
+        displayRecommendation(paypalCalc);
       } else {
-        displayContent(bankToBankCalc);
+        displayRecommendation(bankToBankCalc);
       }
     }
-   
 }
 
 // print and such 
-function displayContent(bestCalculation) {
+function displayRecommendation(recPayMethod) {
     var newAmountEl = document.getElementById("new-amount"),
-        totalWithdrawalsEl = document.getElementById("total-withdrawals");
-        prefferdMethodEl = document.getElementById("preferred-method");
+        totalWithdrawalsEl = document.getElementById("total-withdrawals"),
+        prefMethodEl = document.getElementById("preferred-method"),
+        initialAmtEl = document.getElementById("initial-amount"),
+        totalFeesEl = document.getElementById("total-fees"),
+        finalAmtEl = document.getElementById("final-amount");
 
-    prefferdMethodEl.innerText = bestCalculation.preferredMethod;
-    prefferdMethodEl.parentElement.className = 'payment-method ' + bestCalculation.className;
-    document.getElementById("initial-amount").innerText = bestCalculation.amount;
-    document.getElementById("total-fees").innerText = parseInt(bestCalculation.totalFees, 10).toFixed(2);
-    document.getElementById("final-amount").innerText = parseInt(bestCalculation.finalAmount, 10).toFixed(2);
+    prefMethodEl.parentElement.className = 'payment-method ' + recPayMethod.className;
+    prefMethodEl.innerText = recPayMethod.preferredMethod;
+    initialAmtEl.innerText = parseFloat(recPayMethod.amount).toFixed(2);
+    totalFeesEl.innerText = parseFloat(recPayMethod.totalFees).toFixed(2);
+    finalAmtEl.innerText = parseFloat(recPayMethod.finalAmount).toFixed(2);
 
-    if(bestCalculation.newAmount) {
+    if(recPayMethod.newAmount) {
       newAmountEl.parentElement.style.display = 'list-item';
-      newAmountEl.innerText = parseInt(bestCalculation.newAmount, 10).toFixed(2);
+      newAmountEl.innerText = parseFloat(recPayMethod.newAmount).toFixed(2);
     } else {
       newAmountEl.parentElement.style.display = 'none';
     }
 
-    if(bestCalculation.totalWithdrawals) {
+    if(recPayMethod.totalWithdrawals) {
       totalWithdrawalsEl.parentElement.style.display = 'inline';
-      totalWithdrawalsEl.innerText = bestCalculation.totalWithdrawals;
+      totalWithdrawalsEl.innerText = recPayMethod.totalWithdrawals;
     } else {
       totalWithdrawalsEl.parentElement.style.display = 'none';
     }

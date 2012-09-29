@@ -7,20 +7,22 @@ body {
   font-weight: bold;
   line-height: 28px;
 }
-.calc-form {
-  background: $gray;
-}
 .comparison {
+  border-radius: 3px;
   display: inline-block;
-  padding: 70px 15px 15px;
+  margin: 20px 0 10px;
+  padding: 0 15px 15px;
   vertical-align: top;
   width: 320px;
+  -moz-transition: 0.2s linear all;
+  -webkit-transition: 0.2s linear all;
+  transition: 0.2s linear all;
 }
 .comparison.best {
-  background-color: $gray;
+  box-shadow: 0 0 30px #e6fbdf, 0 0 40px #eefde9, 0 0 50px #f9fef8;
 }
-.comparison.comparison-paypal {
-  text-align: right;
+.comparison h2 {
+  text-align: center;
 }
 .comparison .b2b-initial-amount {
   margin-bottom: 27px;
@@ -48,7 +50,8 @@ body {
 }
 .total-input {
   background: #fff;
-  border: 1px solid #bfbfbf;
+  border: 1px solid #73eb4a;
+  box-shadow: inset 0 0 10px #eee;
   border-radius: 3px;
   font-size: 24px;
   font-family: Georgia, Times New Roman, serif;
@@ -57,24 +60,19 @@ body {
   padding: 0 10px;
   text-align: center;
   width: 80px;
+  -moz-transition: 0.2s linear all;
+  -webkit-transition: 0.2s linear all;
+  transition: 0.2s linear all;
 }
 .total-input:focus {
-  box-shadow: 0 0 16px #969696, 0 0 10px #c9c9c9, 0 0 4px #fcfcfc;
+  box-shadow: inset 0 0 20px #eee, 0 0 30px #e6fbdf, 0 0 40px #eefde9, 0 0 50px #f9fef8;
   outline: 0;
 }
-.paypal,
-.comparison-paypal {
+.paypal {
   background: url("/images/paypal.png") -5px 35px no-repeat;
 }
-.bank-transfer,
-.comparison-bank-transfer {
+.bank-transfer {
   background: url("/images/bncr.gif") left 48px no-repeat;
-}
-.comparison-paypal {
-  background-position: center 10px;
-}
-.comparison-bank-transfer {
-  background-position: top center;
 }
 .hidden {
   display: none;

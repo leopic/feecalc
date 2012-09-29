@@ -1,6 +1,10 @@
 body {
   font: 16px/24px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+h1 {
+  color: #21610b;
+  margin-top: 50px;
+}
 .amt {
   color: #333;
   font-size: 22px;
